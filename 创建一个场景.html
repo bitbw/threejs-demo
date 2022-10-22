@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>My first three.js app</title>
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="js/three.js"></script>
+    <script>
+        /* 
+        1 创建一个场景
+         */
+        /* 
+        1.1 创建一个场景
+        */
+        // 创建一个场景实例
+        const scene = new THREE.Scene();
+        // 创建一个相机实例  PerspectiveCamera （透视摄像机）
+        /* 
+            第一个参数是视野角度（FOV）。视野角度就是无论在什么时候，你所能在显示器上看到的场景的范围，它的单位是角度(与弧度区分开)。
+
+            第二个参数是长宽比（aspect ratio）。 也就是你用一个物体的宽除以它的高的值。比如说，当你在一个宽屏电视上播放老电影时，可以看到图像仿佛是被压扁的。
+
+            接下来的两个参数是近截面（near）和远截面（far）。 当物体某些部分比摄像机的远截面远或者比近截面近的时候，该这些部分将不会被渲染到场景中。或许现在你不用担心这个值的影响，但未来为了获得更好的渲染性能，你将可以在你的应用程序里去设置它。
+        */
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        // 创建一个渲染器的实例
+        const renderer = new THREE.WebGLRenderer();
+        // 设置渲染器大小 渲染器大小决定 canvas 的大小
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        // 将 renderer（渲染器）的dom元素   <canvas> 添加到页面
+        document.body.appendChild(renderer.domElement);
+
+        /* 
+        1.2 创建一个立方体
+        */
+        // 创建一个立方体   BoxGeometry（立方体）对象.
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        // 材质 网格基础材质(MeshBasicMaterial)
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        // 通过 geometry  和 material  创建  Mesh（网格） 网格包含一个几何体以及作用在此几何体上的材质
+        const cube = new THREE.Mesh(geometry, material);
+        // 将立方体添加到场景
+        scene.add(cube);
+        /*
+        默认情况下，当我们调用scene.add()的时候，物体将会被添加到(0,0,0)坐标。但将使得摄像机和立方体彼此在一起。
+        为了防止这种情况的发生，我们只需要将摄像机稍微向外移动一些即可 
+         */
+
+        camera.position.z = 5;
+        /* 
+        2. 渲染场景
+        真正的渲染 渲染循环”（render loop）或者“动画循环”（animate loop）
+        */
+
+        function animate() {
+            // requestAnimationFrame 会根据浏览器的频率调用 最重要的一点或许就是当用户切换到其它的标签页时，它会暂停，因此不会浪费用户宝贵的处理器资源，也不会损耗电池的使用寿命
+            //  这里使用递归的方式循环调用 animate 
+            requestAnimationFrame(animate);
+            // 渲染
+            renderer.render(scene, camera);
+            /*
+            2.1 使立方体动起来 
+             */
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            /* 
+            PS:
+            这段代码每帧都会执行（正常情况下是60次/秒），这就让立方体有了一个看起来很不错的旋转动画。
+            基本上来说，当应用程序运行时，如果你想要移动或者改变任何场景中的东西，都必须要经过这个动画循环。
+            当然，你可以在这个动画循环里调用别的函数，这样你就不会写出有上百行代码的animate函数。
+            */
+        }
+        // 调用
+        animate();
+
+    </script>
+</body>
+
+</html>
