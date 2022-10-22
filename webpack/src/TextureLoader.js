@@ -23,6 +23,10 @@ var cube = new THREE.Mesh(geometry, material)
 cube.position.x = -100  // 横坐标
 cube.position.y = -100  // 纵坐标
 cube.position.z = -300  // 对着屏幕的位置
+
+cube.rotation.y = Math.PI / 6
+cube.rotation.z = Math.PI / 6
+cube.rotation.x = Math.PI / 3
 // 放入场景
 scene.add( cube );
 
@@ -36,6 +40,7 @@ function animate() {
      */
     cube.rotation.x += 0.02;
     cube.rotation.y += 0.02;
+    cube.rotation.z += 0.02;
 }
 // 调用
 animate();

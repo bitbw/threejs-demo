@@ -28,7 +28,7 @@
         const scene = new THREE.Scene();
         //create a blue LineBasicMaterial  创建蓝色线条基本材料
         const material = new THREE.LineBasicMaterial({ color: 0x0000ff });
-        //  创建三个顶点
+        //  创建三个顶点（三维向量）
         const points = [];
         points.push(new THREE.Vector3(- 10, 0, 0));
         points.push(new THREE.Vector3(0, 10, 0));
@@ -36,7 +36,7 @@
         /*
         注意，线是画在每一对连续的顶点之间的，而不是在第一个顶点和最后一个顶点之间绘制线条（线条并未闭合）。 
          */
-        // 通过顶点数据创建一个几何体 geometry
+        // 通过顶点数据（三维向量）创建一个几何体 geometry
         const geometry = new THREE.BufferGeometry().setFromPoints(points);
         // 通过 geometry  和 material  创建  line
         const line = new THREE.Line(geometry, material);
