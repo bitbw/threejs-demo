@@ -14,4 +14,5 @@
 // import "./three_basic/09fullscreen" // 双击进入全屏和退出全屏
 // import "./three_basic/10gui" // 双击进入全屏和退出全屏
 // import "./three_mesh/01BufferGeometry" // BufferGeometry
-import "./three_mesh/03Texture" // 纹理
+// import "./three_mesh/03Texture" // 纹理
+import "./three_mesh/09Light" // 灯光
